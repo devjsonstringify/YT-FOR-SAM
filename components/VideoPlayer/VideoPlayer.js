@@ -5,14 +5,14 @@ import styled from 'styled-components'
 
 const StyledBox = styled(Box)`
   position: relative;
-  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  padding-top: calc((9 / 16) * 100%);
 
   .react-player {
     position: absolute;
     top: 0;
     left: 0;
     width: 100% !important;
-    height: calc(100% - 20%) !important;
+    height: 100% !important;
   }
 `
 
