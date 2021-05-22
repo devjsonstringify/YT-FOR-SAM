@@ -3,10 +3,18 @@ import Box from '@material-ui/core/Box'
 
 const StyledBoxFooter = styled(Box)`
   bottom: 0;
+  background-color: #ffc300;
   position: absolute;
+  left: 0;
+  right: 0;
+  min-height: 5rem;
 `
 const Footer = () => {
-  return <StyledBoxFooter>footer here..</StyledBoxFooter>
+  return (
+    <StyledBoxFooter color="primary" display="flex">
+      <Box margin="auto">Made with ❤️ by Daddy</Box>
+    </StyledBoxFooter>
+  )
 }
 
 export default Footer
