@@ -1,3 +1,4 @@
 
 
 https://www.benmvp.com/blog/prettier-eslint/
+https://blog.echobind.com/integrating-prettier-eslint-airbnb-style-guide-in-vscode-47f07b5d7d6a - Integrating Prettier + ESLint + Airbnb Style Guide in VSCode
