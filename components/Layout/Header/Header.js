@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div>
       <Typography variant="h6" noWrap>
-        YT_FS
+        youtube only for Sam
       </Typography>
     </div>
   )
