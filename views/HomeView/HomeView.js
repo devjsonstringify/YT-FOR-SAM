@@ -1,5 +1,5 @@
-import Layout from '../../components/Layout'
-import VideoPlayer from '../../components/VideoPlayer'
+import Layout from 'components/Layout'
+import VideoPlayer from 'components/VideoPlayer'
 
 const HomeView = () => {
   return (
