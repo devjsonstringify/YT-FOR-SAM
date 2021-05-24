@@ -1,6 +1,5 @@
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
-import CardMedia from '@material-ui/core/CardMedia'
 import Container from '@material-ui/core/Container'
 import Grow from '@material-ui/core/Grow'
 import Typography from '@material-ui/core/Typography'
@@ -11,14 +10,22 @@ import VideoPlayer from 'components/VideoPlayer'
 import { DEFAULT_VIDEO } from './data'
 
 const Introduction = () => {
-  console.log(DEFAULT_VIDEO)
   const [isWatchNowCick, setIsWatchNowCick] = useToggle(false)
   return (
     <Box margin="2rem auto" padding="2rem">
       <Container maxWidth="md">
         {isWatchNowCick ? (
           <Grow in={isWatchNowCick}>
-            <VideoPlayer data={DEFAULT_VIDEO} />
+            <>
+              <Box display="flex">
+                <Box margin="auto">
+                  <Button variant="contained" color="secondary">
+                    Paste video link
+                  </Button>
+                </Box>
+              </Box>
+              <VideoPlayer data={DEFAULT_VIDEO} />
+            </>
           </Grow>
         ) : (
           <Paper>
