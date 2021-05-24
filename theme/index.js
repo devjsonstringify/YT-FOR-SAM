@@ -28,7 +28,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ['Concert One'].join(','),
+    fontFamily: ['Concert One', 'Fredoka One'].join(','),
   },
   overrides: {
     MuiButton: {
