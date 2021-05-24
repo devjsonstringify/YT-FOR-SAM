@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const StyledBox = styled(Box)`
   position: relative;
-  min-height: calc(100vh - 20vh);
+  padding-top: calc((9 / 16) * 100%);
   width: 100%;
 
   .react-player {
@@ -20,16 +20,18 @@ const StyledBox = styled(Box)`
 
 const VideoPlayer = () => {
   return (
-    <Container mawWidth="md">
-      <StyledBox>
-        <ReactPlayer
-          className="react-player"
-          url="https://www.youtube.com/watch?v=XdvdLo3IC8s&list=UUaUPjphSCehRXTnGvgmaOZA&index=2s://www.youtube.com/watch?v=XdvdLo3IC8s&list=UUaUPjphSCehRXTnGvgmaOZA&index=2"
-          controls
-          playing
-        />
-      </StyledBox>
-    </Container>
+    <Box margin="5rem auto">
+      <Container maxWidth="sm">
+        <StyledBox>
+          <ReactPlayer
+            className="react-player"
+            url="https://www.youtube.com/watch?v=XdvdLo3IC8s&list=UUaUPjphSCehRXTnGvgmaOZA&index=2s://www.youtube.com/watch?v=XdvdLo3IC8s&list=UUaUPjphSCehRXTnGvgmaOZA&index=2"
+            controls
+            playing
+          />
+        </StyledBox>
+      </Container>
+    </Box>
   )
 }
 
