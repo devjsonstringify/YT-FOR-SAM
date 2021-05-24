@@ -23,7 +23,7 @@ const Header = () => {
   const { onHandleClickToggleForm } = useContext(HomeContext)
   return (
     <StyledBox>
-      <Box>
+      <Box display="flex" alignItems="center">
         <Typography variant="h6" noWrap>
           youtube only for Sam
         </Typography>
