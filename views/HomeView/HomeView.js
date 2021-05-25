@@ -9,16 +9,35 @@ import Introduction from './Introduction/Introduction'
 const HomeView = () => {
   const [isFormVisible, setIsFormVisible] = useToggle()
   const [isIntroduction, setIsIntroduction] = useState(true)
+  const [videoPlayerState, setVideoPlayerState] = useState({
+    link: '/assets/intro.mp4',
+    name: '#intro',
+  })
 
   const onHandleClickToggleForm = useCallback(
     () => setIsFormVisible(),
     [isFormVisible],
   )
 
+  const OnHandleSetPlayerVideo = ({ link, name }) => {
+    setVideoPlayerState((prev) => ({
+      ...prev,
+      link,
+      name,
+    }))
+  }
+
   const API = useMemo(
-    () => ({ onHandleClickToggleForm, isFormVisible }),
-    [isFormVisible],
+    () => ({
+      onHandleClickToggleForm,
+      OnHandleSetPlayerVideo,
+      isFormVisible,
+      videoPlayerState,
+    }),
+    [isFormVisible, videoPlayerState],
   )
+
+  console.log(videoPlayerState)
 
   return (
     <HomeContext.Provider value={API}>

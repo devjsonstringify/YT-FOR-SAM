@@ -1,3 +1,4 @@
+import { useState, useContext } from 'react'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
@@ -7,14 +8,17 @@ import Zoom from '@material-ui/core/Zoom'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
+import isEmpty from 'lodash/isEmpty'
 import styled from 'styled-components'
 import { Form, Field } from 'react-final-form'
 import useToggle from 'hooks/useToggle'
 import VideoPlayer from 'components/VideoPlayer'
 import { DEFAULT_VIDEO } from './data'
 import PreselectedVideosList from '../PreselectedVideosList/PreselectedVideosList'
+import HomeContext from '../HomeContext'
 
 const Introduction = () => {
+  const { videoPlayerState } = useContext(HomeContext)
   const [isWatchNowCick, setIsWatchNowCick] = useToggle(false)
   const [isFormVisible, setIsFormVisible] = useToggle(false)
 
@@ -36,7 +40,7 @@ const Introduction = () => {
                 <PreselectedVideosList />
               </Grid>
               <Grid item md={9}>
-                <VideoPlayer data={DEFAULT_VIDEO} />
+                <VideoPlayer data={videoPlayerState} />
               </Grid>
             </Grid>
           </Grow>

@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { Typography } from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/button'
@@ -10,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import styled from 'styled-components'
 import { LOCAL_STORAGE_VIDEOS_LIST } from './data'
+import HomeContext from 'views/HomeView/HomeContext'
 
 const StyledListItemText = styled(ListItemText)`
   color: #806200 !important;
@@ -29,6 +31,7 @@ const StyledButton = styled(Button)`
 `
 
 const PreselectedVideosList = () => {
+  const { OnHandleSetPlayerVideo } = useContext(HomeContext)
   return (
     <Paper>
       <Box padding="1rem">
@@ -38,10 +41,10 @@ const PreselectedVideosList = () => {
           </Typography>
         </Box>
         <List dense>
-          {LOCAL_STORAGE_VIDEOS_LIST.map(({ id, name }) => (
+          {LOCAL_STORAGE_VIDEOS_LIST.map(({ id, name, link }) => (
             <ListItem key={id} dense>
               <StyledButton
-                onClick={() => console.log(name)}
+                onClick={() => OnHandleSetPlayerVideo({ link, name })}
                 variant="text"
                 fullWidth
               >

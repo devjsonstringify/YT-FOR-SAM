@@ -33,7 +33,7 @@ const StyledBox = styled(Box)`
 `
 
 const VideoPlayer = ({ data }) => {
-  const { avatarImage, title, subheader, link, description } = data
+  const { avatarImage, name, subheader, link, description } = data
   return (
     <Box margin="auto">
       <Container maxWidth="md">
@@ -46,7 +46,7 @@ const VideoPlayer = ({ data }) => {
                   <MoreVertIcon />
                 </IconButton>
               }
-              title={title}
+              title={name}
               subheader={subheader}
             />
             <StyledBox>
