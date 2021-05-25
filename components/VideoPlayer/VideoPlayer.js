@@ -35,8 +35,8 @@ const StyledBox = styled(Box)`
 const VideoPlayer = ({ data }) => {
   const { avatarImage, title, subheader, link, description } = data
   return (
-    <Box margin="5rem auto">
-      <Container maxWidth="sm">
+    <Box margin="auto">
+      <Container maxWidth="md">
         <Box boxShadow="0px 20px 34px 0px rgba(0,41,158,0.3)">
           <Card>
             <CardHeader
