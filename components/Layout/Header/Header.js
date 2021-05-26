@@ -25,7 +25,7 @@ const Header = () => {
     <StyledBox>
       <Box display="flex" alignItems="center">
         <Typography variant="h6" noWrap>
-          youtube only for Sam
+          save-and-watch-videos
         </Typography>
       </Box>
       <Box>
