@@ -1,4 +1,4 @@
-import { useContext, useState, useMemo, useCallback } from 'react'
+import { useContext, useState, useMemo, useCallback, useRef } from 'react'
 import Layout from 'components/Layout'
 import VideoPlayer from 'components/VideoPlayer'
 import Form from 'components/Form'
@@ -7,6 +7,7 @@ import useToggle from 'hooks/useToggle'
 import Introduction from './Introduction/Introduction'
 
 const HomeView = () => {
+  const showOnlyOnceRef = useRef(false)
   const [isFormVisible, setIsFormVisible] = useToggle()
   const [isIntroduction, setIsIntroduction] = useState(true)
   const [videoPlayerState, setVideoPlayerState] = useState({
@@ -14,10 +15,10 @@ const HomeView = () => {
     name: '#intro',
   })
 
-  const onHandleClickToggleForm = useCallback(
-    () => setIsFormVisible(),
-    [isFormVisible],
-  )
+  const onHandleClickToggleForm = useCallback(() => {
+    setIsFormVisible()
+    showOnlyOnceRef.current = true
+  }, [isFormVisible])
 
   const OnHandleSetPlayerVideo = ({ link, name }) => {
     setVideoPlayerState((prev) => ({
@@ -33,6 +34,7 @@ const HomeView = () => {
       OnHandleSetPlayerVideo,
       isFormVisible,
       videoPlayerState,
+      showOnlyOnceRef,
     }),
     [isFormVisible, videoPlayerState],
   )

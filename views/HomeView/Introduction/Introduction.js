@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useRef } from 'react'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
@@ -18,9 +18,10 @@ import PreselectedVideosList from '../PreselectedVideosList/PreselectedVideosLis
 import HomeContext from '../HomeContext'
 
 const Introduction = () => {
-  const { videoPlayerState } = useContext(HomeContext)
+  const { videoPlayerState, showOnlyOnceRef } = useContext(HomeContext)
   const [isWatchNowCick, setIsWatchNowCick] = useToggle(false)
   const [isFormVisible, setIsFormVisible] = useToggle(false)
+  const reference = useRef(false)
 
   const onSubmit = (values) => {
     window.alert(JSON.stringify(values, 0, 2))
@@ -33,8 +34,8 @@ const Introduction = () => {
   return (
     <Box padding="2rem">
       <Container maxWidth="lg">
-        {isWatchNowCick ? (
-          <Grow in={isWatchNowCick}>
+        {(isWatchNowCick || showOnlyOnceRef.current) && (
+          <Grow in={isWatchNowCick || showOnlyOnceRef.current}>
             <Grid container spacing={5}>
               <Grid item md={3}>
                 <PreselectedVideosList />
@@ -44,8 +45,10 @@ const Introduction = () => {
               </Grid>
             </Grid>
           </Grow>
-        ) : (
-          <Paper>
+        )}
+
+        {showOnlyOnceRef.current ? null : (
+          <Paper ref={reference}>
             <Box
               padding="5rem"
               boxShadow="-10px 17px 0px 0px rgba(0,41,158,0.3)"
@@ -63,7 +66,10 @@ const Introduction = () => {
                       variant="contained"
                       size="large"
                       color="secondary"
-                      onClick={() => setIsWatchNowCick()}
+                      onClick={() => {
+                        showOnlyOnceRef.current = true
+                        setIsWatchNowCick()
+                      }}
                     >
                       Watch now
                     </Button>
