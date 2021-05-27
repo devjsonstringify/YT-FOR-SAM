@@ -22,7 +22,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const FinalForm = () => {
   const id = uuidv4()
-  const { isFormVisible } = useContext(HomeContext)
+  const { isFormVisible, onHandleClickToggleForm } = useContext(HomeContext)
   const [nodes] = useState(() => {
     try {
       // Get from local storage by key
@@ -147,17 +147,29 @@ const FinalForm = () => {
                       </Box>
                     </Box>
 
-                    <Box>
-                      <Button
-                        type="submit"
-                        disabled={submitting || pristine}
-                        color="secondary"
-                        variant="contained"
-                      >
-                        {pageState.loading == 'loading'
-                          ? 'loading..'
-                          : 'save video'}
-                      </Button>
+                    <Box display="flex">
+                      <Box margin="0 0.5rem">
+                        <Button
+                          color="secondary"
+                          size="medium"
+                          variant="contained"
+                          onClick={onHandleClickToggleForm}
+                        >
+                          Cancel
+                        </Button>
+                      </Box>
+                      <Box margin="0 0.5rem">
+                        <Button
+                          type="submit"
+                          disabled={submitting || pristine}
+                          color="secondary"
+                          variant="contained"
+                        >
+                          {pageState.loading == 'loading'
+                            ? 'loading..'
+                            : 'save video'}
+                        </Button>
+                      </Box>
                     </Box>
                   </form>
                 )}
