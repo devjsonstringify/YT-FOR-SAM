@@ -75,7 +75,7 @@ const FinalForm = () => {
             <Box padding="5rem 4rem" boxSizing="border-box">
               <Box marginBottom="2rem">
                 <Typography variant="h4">
-                  Find Youtube videos by channel name
+                  Please add your video detils here
                 </Typography>
               </Box>
               <Form
