@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Typography } from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
@@ -10,6 +10,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import styled from 'styled-components'
+import isEmpty from 'lodash/isEmpty'
 import { LOCAL_STORAGE_VIDEOS_LIST } from './data'
 import HomeContext from 'views/HomeView/HomeContext'
 
@@ -21,6 +22,7 @@ const StyledListItemText = styled(ListItemText)`
   border: 1px solid #ffc300;
   text-align: center;
   border-radius: 11px;
+  word-break: break-all;
 `
 const StyledButton = styled(Button)`
   padding: 0;
@@ -32,15 +34,29 @@ const StyledButton = styled(Button)`
 
 const PreselectedVideosList = () => {
   const { OnHandleSetPlayerVideo } = useContext(HomeContext)
+  const [nodes] = useState(() => {
+    try {
+      // Get from local storage by key
+      const item = window.localStorage.getItem('nodes')
+      // Parse stored json or if none return initialValue
+      return item ? JSON.parse(item) : []
+    } catch (error) {
+      // If error also return initialValue
+      console.log(error)
+      return initialValue
+    }
+  })
+
   return (
     <Paper>
-      <Box padding="1rem">
+      <Box padding="1rem" maxHeight="calc(100vh - 30vh)" overflow="auto">
         <Box marginBottom="2rem">
           <Typography variant="h6">
             Locally saved videos on your machine
           </Typography>
         </Box>
         <List dense>
+          {/* preselected data */}
           {LOCAL_STORAGE_VIDEOS_LIST.map(({ id, name, link }) => (
             <ListItem key={id} dense>
               <StyledButton
@@ -52,6 +68,19 @@ const PreselectedVideosList = () => {
               </StyledButton>
             </ListItem>
           ))}
+          {/* localstorage data */}
+          {!isEmpty(nodes) &&
+            nodes.map(({ id, name, link }) => (
+              <ListItem key={id} dense>
+                <StyledButton
+                  onClick={() => OnHandleSetPlayerVideo({ link, name })}
+                  variant="text"
+                  fullWidth
+                >
+                  <StyledListItemText primary={name} />
+                </StyledButton>
+              </ListItem>
+            ))}
         </List>
       </Box>
     </Paper>

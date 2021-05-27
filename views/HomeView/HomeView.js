@@ -39,8 +39,6 @@ const HomeView = () => {
     [isFormVisible, videoPlayerState],
   )
 
-  console.log(videoPlayerState)
-
   return (
     <HomeContext.Provider value={API}>
       <Layout>
