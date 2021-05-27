@@ -64,10 +64,12 @@ const PreselectedVideosList = () => {
         </Box>
         <List dense>
           {/* preselected data */}
-          {LOCAL_STORAGE_VIDEOS_LIST.map(({ id, name, link }) => (
+          {LOCAL_STORAGE_VIDEOS_LIST.map(({ id, name, link, description }) => (
             <ListItem key={id} dense>
               <StyledButton
-                onClick={() => OnHandleSetPlayerVideo({ link, name })}
+                onClick={() =>
+                  OnHandleSetPlayerVideo({ link, name, description })
+                }
                 variant="text"
                 fullWidth
               >
@@ -77,10 +79,12 @@ const PreselectedVideosList = () => {
           ))}
           {/* localstorage data */}
           {!isEmpty(nodes) &&
-            nodes.map(({ id, name, link }) => (
+            nodes.map(({ id, name, link, description }) => (
               <ListItem key={id} dense>
                 <StyledButton
-                  onClick={() => OnHandleSetPlayerVideo({ link, name })}
+                  onClick={() =>
+                    OnHandleSetPlayerVideo({ link, name, description })
+                  }
                   variant="text"
                   fullWidth
                 >

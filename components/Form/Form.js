@@ -70,12 +70,16 @@ const FinalForm = () => {
   return (
     <Grow in={isFormVisible}>
       <StyledContainer maxWidth="md">
-        <Box margin="5rem auto" height="100%">
+        <Box
+          margin="5rem auto"
+          height="100%"
+          boxShadow="0px 9px 24px 0px rgba(0,41,158,0.3);"
+        >
           <Paper>
             <Box padding="5rem 4rem" boxSizing="border-box">
               <Box marginBottom="2rem">
                 <Typography variant="h4">
-                  Please add your video detils here
+                  Please add your video information here
                 </Typography>
               </Box>
               <Form
@@ -99,8 +103,8 @@ const FinalForm = () => {
                   >
                     <Box
                       display="grid"
-                      gridTemplateColumns="1fr 1fr"
-                      gridTemplateRows="1fr"
+                      gridTemplateColumns="1fr"
+                      gridTemplateRows="1fr 1fr 1fr"
                       gap="1rem 1rem"
                       margin="2rem auto"
                     >
@@ -112,9 +116,30 @@ const FinalForm = () => {
                           {(props) => (
                             <Box margin="0 1rem" flexGrow="3">
                               <TextField
-                                required
                                 fullWidth
+                                required
                                 placeholder="#video"
+                                name={props.input.name}
+                                value={props.input.value}
+                                onChange={props.input.onChange}
+                              />
+                            </Box>
+                          )}
+                        </Field>
+                      </Box>
+                      <Box display="flex">
+                        <Box>
+                          <Typography>
+                            Tell me something about this video
+                          </Typography>
+                        </Box>
+                        <Field name="description">
+                          {(props) => (
+                            <Box margin="0 1rem" flexGrow="3">
+                              <TextField
+                                fullWidth
+                                required
+                                placeholder="I like this video ..."
                                 name={props.input.name}
                                 value={props.input.value}
                                 onChange={props.input.onChange}
@@ -141,9 +166,6 @@ const FinalForm = () => {
                             </Box>
                           )}
                         </Field>
-                        <Box>
-                          <Typography>?</Typography>
-                        </Box>
                       </Box>
                     </Box>
 

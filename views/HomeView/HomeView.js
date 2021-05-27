@@ -13,6 +13,8 @@ const HomeView = () => {
   const [videoPlayerState, setVideoPlayerState] = useState({
     link: '/assets/intro.mp4',
     name: '#intro',
+    description:
+      'Credit: video is from https://pixabay.com/videos/puppies-dogs-friendship-joy-69168/',
   })
 
   const onHandleClickToggleForm = useCallback(() => {
@@ -20,11 +22,12 @@ const HomeView = () => {
     showOnlyOnceRef.current = true
   }, [isFormVisible])
 
-  const OnHandleSetPlayerVideo = ({ link, name }) => {
+  const OnHandleSetPlayerVideo = ({ link, name, description }) => {
     setVideoPlayerState((prev) => ({
       ...prev,
       link,
       name,
+      description,
     }))
   }
 
