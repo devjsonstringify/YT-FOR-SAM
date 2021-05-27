@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>YT-Single-channel-only</title>
+        <title>save-and-watch-videos</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeView />
