@@ -15,14 +15,21 @@ import { LOCAL_STORAGE_VIDEOS_LIST } from './data'
 import HomeContext from 'views/HomeView/HomeContext'
 
 const StyledListItemText = styled(ListItemText)`
-  color: #806200 !important;
+  color: #806200;
   background-color: #ffcf33;
   padding: 0.5em;
   transition: 0.2s border ease-in-out, 0.2s box-shadow ease-in-out;
   border: 1px solid #ffc300;
   text-align: center;
+  transition: opacity 1s 0s linear;
   border-radius: 11px;
   word-break: break-all;
+
+  &:hover {
+    background-color: #003566;
+    border: 1px solid #003566;
+    color: #ffffff;
+  }
 `
 const StyledButton = styled(Button)`
   padding: 0;
