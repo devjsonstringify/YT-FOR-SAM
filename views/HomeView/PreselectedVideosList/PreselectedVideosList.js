@@ -48,10 +48,21 @@ const PreselectedVideosList = () => {
   return (
     <Paper>
       <Box padding="1rem" maxHeight="calc(100vh - 30vh)" overflow="auto">
-        <Box marginBottom="2rem">
+        <Box>
           <Typography variant="h6" align="center">
             Your saved items
           </Typography>
+          <Box display="flex">
+            <Box margin="1rem auto">
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={onHandleClickToggleForm}
+              >
+                add
+              </Button>
+            </Box>
+          </Box>
         </Box>
         <List dense>
           {/* localstorage data */}
@@ -61,16 +72,6 @@ const PreselectedVideosList = () => {
                 <Typography>
                   No saved item yet <SentimentDissatisfiedIcon />
                 </Typography>
-                <Box margin="1rem auto">
-                  <Button
-                    color="secondary"
-                    fullWidth
-                    variant="contained"
-                    onClick={onHandleClickToggleForm}
-                  >
-                    add
-                  </Button>
-                </Box>
               </Box>
             </Box>
           ) : (
