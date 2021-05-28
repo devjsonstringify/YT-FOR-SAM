@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import ReactPlayer from 'react-player'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
@@ -12,11 +13,11 @@ import Collapse from '@material-ui/core/Collapse'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import { red } from '@material-ui/core/colors'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
+import Popover from '@material-ui/core/Popover'
+import SettingsIcon from '@material-ui/icons/Settings'
+import CallToActions from './CallToAction'
 
 const StyledBox = styled(Box)`
   position: relative;
@@ -34,6 +35,18 @@ const StyledBox = styled(Box)`
 
 const VideoPlayer = ({ data }) => {
   const { avatarImage, name, subheader, link, description } = data
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'settings' : undefined
   return (
     <Box margin="auto">
       <Container maxWidth="md">
@@ -42,13 +55,31 @@ const VideoPlayer = ({ data }) => {
             <CardHeader
               avatar={<Avatar src={avatarImage} />}
               action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
+                <IconButton aria-label="settings" onClick={handleClick}>
+                  <SettingsIcon />
                 </IconButton>
               }
               title={name}
               subheader={subheader}
             />
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+            >
+              <Box padding="3rem 2rem" height="50%">
+                <CallToActions />
+              </Box>
+            </Popover>
             <StyledBox>
               <ReactPlayer
                 className="react-player"
