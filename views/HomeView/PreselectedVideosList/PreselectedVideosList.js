@@ -79,7 +79,7 @@ const PreselectedVideosList = () => {
               <ListItem key={id} dense>
                 <StyledButton
                   onClick={() =>
-                    OnHandleSetPlayerVideo({ link, name, description })
+                    OnHandleSetPlayerVideo({ id, link, name, description })
                   }
                   variant="text"
                   fullWidth
