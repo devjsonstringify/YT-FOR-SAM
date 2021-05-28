@@ -34,7 +34,7 @@ const StyledBox = styled(Box)`
 `
 
 const VideoPlayer = ({ data }) => {
-  const { avatarImage, name, subheader, link, description } = data
+  const { id: videoID, avatarImage, name, subheader, link, description } = data
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClick = (event) => {
@@ -77,7 +77,7 @@ const VideoPlayer = ({ data }) => {
               }}
             >
               <Box padding="3rem 2rem" height="50%">
-                <CallToActions />
+                <CallToActions deleteByID={videoID} />
               </Box>
             </Popover>
             <StyledBox>

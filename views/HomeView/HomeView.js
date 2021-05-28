@@ -22,9 +22,10 @@ const HomeView = () => {
     showOnlyOnceRef.current = true
   }, [isFormVisible])
 
-  const OnHandleSetPlayerVideo = ({ link, name, description }) => {
+  const OnHandleSetPlayerVideo = ({ id, link, name, description }) => {
     setVideoPlayerState((prev) => ({
       ...prev,
+      id,
       link,
       name,
       description,

@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect, useContext } from 'react'
 import Box from '@material-ui/core/Box'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
@@ -9,6 +9,9 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import { SETTINGS } from './data'
+import useLocalStorage from 'hooks/useLocalStorage'
+import GetLocalStorageByItem from 'utils/getLocalStorageItem'
+import HomeContext from 'views/HomeView/HomeContext'
 
 const StyledList = styled(List)`
   .MuiListItem-root {
@@ -20,7 +23,43 @@ const StyledList = styled(List)`
   }
 `
 
-const CallToAction = () => {
+const CallToAction = ({ deleteByID }) => {
+  // const { setVideoPlayerState } = useContext(HomeContext)
+  const nodes = GetLocalStorageByItem('nodes')
+  const [, setSaveVideo] = useLocalStorage('nodes', [])
+  const [settingsState, setSettingsState] = useState({
+    loading: 'idle',
+    error: false,
+  })
+  const isLoading = settingsState.loading === 'loading'
+
+  useEffect(() => {
+    setSaveVideo(nodes)
+  }, [nodes])
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+  const onDeleteLocalStorageItem = async (idToRemove) => {
+    setSettingsState((prev) => ({
+      ...prev,
+      loading: 'loading',
+    }))
+
+    try {
+      await sleep(1000)
+      const newList = nodes.filter((node) => node.id !== idToRemove)
+      setSaveVideo(newList)
+      setSettingsState((prev) => ({
+        ...prev,
+        loading: 'idle',
+      }))
+      window.location.reload()
+    } catch (error) {
+      setSettingsState((prev) => ({
+        ...prev,
+        error: true,
+      }))
+    }
+  }
   return (
     <Box>
       <Typography align="center">Settings</Typography>
@@ -29,7 +68,11 @@ const CallToAction = () => {
           <Fragment key={id}>
             <ListItem>
               <ListItemIcon>
-                <IconButton>{icon}</IconButton>
+                <IconButton
+                  onClick={() => onDeleteLocalStorageItem(deleteByID)}
+                >
+                  {icon}
+                </IconButton>
               </ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
@@ -37,6 +80,12 @@ const CallToAction = () => {
           </Fragment>
         ))}
       </StyledList>
+      <Box position="relative" display="flex" height="100%" width="100%">
+        <Box margin="2rem auto 0">
+          {isLoading && <Typography>Loading..</Typography>}
+          {settingsState.error && <Typography>Error...</Typography>}
+        </Box>
+      </Box>
     </Box>
   )
 }
