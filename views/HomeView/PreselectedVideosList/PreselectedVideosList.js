@@ -1,5 +1,4 @@
 import { useContext, useState, useEffect } from 'react'
-import { Typography } from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import List from '@material-ui/core/List'
@@ -9,10 +8,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 import styled from 'styled-components'
 import isEmpty from 'lodash/isEmpty'
-import { LOCAL_STORAGE_VIDEOS_LIST } from './data'
 import HomeContext from 'views/HomeView/HomeContext'
+import GetLocalStorageByItem from 'utils/getLocalStorageItem'
 
 const StyledListItemText = styled(ListItemText)`
   color: #806200;
@@ -40,45 +41,39 @@ const StyledButton = styled(Button)`
 `
 
 const PreselectedVideosList = () => {
-  const { OnHandleSetPlayerVideo } = useContext(HomeContext)
-  const [nodes] = useState(() => {
-    try {
-      // Get from local storage by key
-      const item = window.localStorage.getItem('nodes')
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : []
-    } catch (error) {
-      // If error also return initialValue
-      console.log(error)
-      return initialValue
-    }
-  })
+  const { OnHandleSetPlayerVideo, onHandleClickToggleForm } =
+    useContext(HomeContext)
+  const nodes = GetLocalStorageByItem('nodes')
 
   return (
     <Paper>
       <Box padding="1rem" maxHeight="calc(100vh - 30vh)" overflow="auto">
         <Box marginBottom="2rem">
-          <Typography variant="h6">
-            Locally saved videos on your machine
+          <Typography variant="h6" align="center">
+            Your saved items
           </Typography>
         </Box>
         <List dense>
-          {/* preselected data */}
-          {LOCAL_STORAGE_VIDEOS_LIST.map(({ id, name, link, description }) => (
-            <ListItem key={id} dense>
-              <StyledButton
-                onClick={() =>
-                  OnHandleSetPlayerVideo({ link, name, description })
-                }
-                variant="text"
-                fullWidth
-              >
-                <StyledListItemText primary={name} />
-              </StyledButton>
-            </ListItem>
-          ))}
           {/* localstorage data */}
-          {!isEmpty(nodes) &&
+          {isEmpty(nodes) ? (
+            <Box display="flex">
+              <Box margin="auto">
+                <Typography>
+                  No saved item yet <SentimentDissatisfiedIcon />
+                </Typography>
+                <Box margin="1rem auto">
+                  <Button
+                    color="secondary"
+                    fullWidth
+                    variant="contained"
+                    onClick={onHandleClickToggleForm}
+                  >
+                    add
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
+          ) : (
             nodes.map(({ id, name, link, description }) => (
               <ListItem key={id} dense>
                 <StyledButton
@@ -91,7 +86,8 @@ const PreselectedVideosList = () => {
                   <StyledListItemText primary={name} />
                 </StyledButton>
               </ListItem>
-            ))}
+            ))
+          )}
         </List>
       </Box>
     </Paper>

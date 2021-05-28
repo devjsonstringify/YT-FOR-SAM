@@ -14,6 +14,7 @@ import styled from 'styled-components'
 import HomeContext from 'views/HomeView/HomeContext'
 import useLocalStorage from 'hooks/useLocalStorage'
 import { v4 as uuidv4 } from 'uuid'
+import GetLocalStorageByItem from 'utils/getLocalStorageItem'
 
 const StyledContainer = styled(Container)`
   display: flex;
@@ -23,18 +24,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const FinalForm = () => {
   const id = uuidv4()
   const { isFormVisible, onHandleClickToggleForm } = useContext(HomeContext)
-  const [nodes] = useState(() => {
-    try {
-      // Get from local storage by key
-      const item = window.localStorage.getItem('nodes')
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : []
-    } catch (error) {
-      // If error also return initialValue
-      console.log(error)
-      return initialValue
-    }
-  })
+  const nodes = GetLocalStorageByItem('nodes')
   const [pageState, setPageState] = useState({
     loading: 'idle',
     error: false,
