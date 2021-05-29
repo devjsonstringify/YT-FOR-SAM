@@ -21,7 +21,8 @@ Reactjs, Nextjs, material-ui, netlify
 ## Roadmap
 - [ ] Password required for adding new item
 - [ ] Update item
-- [ ] Delete item
+- [x] Delete item
+- [ ] Disable item
 - [ ] Export data 
 - [ ] Responsive
 
