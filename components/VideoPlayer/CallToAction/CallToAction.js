@@ -24,18 +24,13 @@ const StyledList = styled(List)`
 `
 
 const CallToAction = ({ deleteByID }) => {
-  // const { setVideoPlayerState } = useContext(HomeContext)
-  const nodes = GetLocalStorageByItem('nodes')
-  const [, setSaveVideo] = useLocalStorage('nodes', [])
+  const { nodes, setNodes } = useContext(HomeContext)
+
   const [settingsState, setSettingsState] = useState({
     loading: 'idle',
     error: false,
   })
   const isLoading = settingsState.loading === 'loading'
-
-  useEffect(() => {
-    setSaveVideo(nodes)
-  }, [nodes])
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   const onDeleteLocalStorageItem = async (idToRemove) => {
@@ -47,12 +42,11 @@ const CallToAction = ({ deleteByID }) => {
     try {
       await sleep(1000)
       const newList = nodes.filter((node) => node.id !== idToRemove)
-      setSaveVideo(newList)
       setSettingsState((prev) => ({
         ...prev,
         loading: 'idle',
       }))
-      window.location.reload()
+      await setNodes(newList)
     } catch (error) {
       setSettingsState((prev) => ({
         ...prev,

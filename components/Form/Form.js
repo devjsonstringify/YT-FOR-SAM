@@ -23,20 +23,13 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const FinalForm = () => {
   const id = uuidv4()
-  const { isFormVisible, onHandleClickToggleForm } = useContext(HomeContext)
-  const nodes = GetLocalStorageByItem('nodes')
+  const { isFormVisible, onHandleClickToggleForm, setNodes } =
+    useContext(HomeContext)
   const [pageState, setPageState] = useState({
     loading: 'idle',
     error: false,
     notify: false,
-    nodes,
   })
-
-  const [, setSaveVideo] = useLocalStorage('nodes', pageState.lists)
-
-  useEffect(() => {
-    setSaveVideo(pageState.nodes)
-  }, [setSaveVideo])
 
   const onHandleCloseSnackBar = (event, reason) => {
     if (reason === 'clickaway') return
@@ -49,9 +42,9 @@ const FinalForm = () => {
       setPageState((prev) => ({
         ...prev,
         loading: 'loading',
-        nodes: [...prev.nodes, saveNewItem],
       }))
       await sleep(1000)
+      setNodes((prev) => [...prev, saveNewItem])
       setPageState((prev) => ({ ...prev, loading: 'idle', notify: true }))
     } catch (error) {
       setPageState((prev) => ({ ...prev, error, notify: true }))

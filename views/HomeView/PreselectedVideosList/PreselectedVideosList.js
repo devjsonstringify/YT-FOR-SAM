@@ -13,7 +13,6 @@ import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 import styled from 'styled-components'
 import isEmpty from 'lodash/isEmpty'
 import HomeContext from 'views/HomeView/HomeContext'
-import GetLocalStorageByItem from 'utils/getLocalStorageItem'
 
 const StyledListItemText = styled(ListItemText)`
   color: #806200;
@@ -41,9 +40,8 @@ const StyledButton = styled(Button)`
 `
 
 const PreselectedVideosList = () => {
-  const { OnHandleSetPlayerVideo, onHandleClickToggleForm } =
+  const { OnHandleSetPlayerVideo, onHandleClickToggleForm, nodes } =
     useContext(HomeContext)
-  const nodes = GetLocalStorageByItem('nodes')
 
   return (
     <Paper>

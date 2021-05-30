@@ -1,12 +1,21 @@
-import { useContext, useState, useMemo, useCallback, useRef } from 'react'
+import {
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react'
 import Layout from 'components/Layout'
 import VideoPlayer from 'components/VideoPlayer'
 import Form from 'components/Form'
 import HomeContext from './HomeContext'
 import useToggle from 'hooks/useToggle'
+import useLocalStorage from 'hooks/useLocalStorage'
 import Introduction from './Introduction/Introduction'
 
 const HomeView = () => {
+  const [nodes, setNodes] = useLocalStorage('nodes', [])
   const showOnlyOnceRef = useRef(false)
   const [isFormVisible, setIsFormVisible] = useToggle()
   const [isIntroduction, setIsIntroduction] = useState(true)
@@ -16,6 +25,10 @@ const HomeView = () => {
     description:
       'Credit: video is from https://pixabay.com/videos/puppies-dogs-friendship-joy-69168/',
   })
+
+  useEffect(() => {
+    setNodes(nodes)
+  }, [setNodes, setNodes])
 
   const onHandleClickToggleForm = useCallback(() => {
     setIsFormVisible()
@@ -39,8 +52,10 @@ const HomeView = () => {
       isFormVisible,
       videoPlayerState,
       showOnlyOnceRef,
+      nodes,
+      setNodes,
     }),
-    [isFormVisible, videoPlayerState],
+    [isFormVisible, videoPlayerState, nodes],
   )
 
   return (
