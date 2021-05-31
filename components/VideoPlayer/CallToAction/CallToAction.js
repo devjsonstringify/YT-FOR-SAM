@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import { SETTINGS } from './data'
 import useLocalStorage from 'hooks/useLocalStorage'
-import GetLocalStorageByItem from 'utils/getLocalStorageItem'
 import HomeContext from 'views/HomeView/HomeContext'
 
 const StyledList = styled(List)`

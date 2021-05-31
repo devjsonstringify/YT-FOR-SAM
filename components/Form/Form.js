@@ -14,7 +14,6 @@ import styled from 'styled-components'
 import HomeContext from 'views/HomeView/HomeContext'
 import useLocalStorage from 'hooks/useLocalStorage'
 import { v4 as uuidv4 } from 'uuid'
-import GetLocalStorageByItem from 'utils/getLocalStorageItem'
 
 const StyledContainer = styled(Container)`
   display: flex;
