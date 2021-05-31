@@ -23,14 +23,6 @@ const Introduction = () => {
   const [isFormVisible, setIsFormVisible] = useToggle(false)
   const reference = useRef(false)
 
-  const onSubmit = (values) => {
-    window.alert(JSON.stringify(values, 0, 2))
-  }
-
-  const onHandleFindVideo = () => {
-    setIsFormVisible()
-  }
-
   return (
     <Box padding="2rem">
       <Container maxWidth="lg">
