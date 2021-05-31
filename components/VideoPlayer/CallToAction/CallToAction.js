@@ -1,6 +1,8 @@
 import { useState, Fragment, useEffect, useContext } from 'react'
 import Box from '@material-ui/core/Box'
 import Divider from '@material-ui/core/Divider'
+import head from 'lodash/head'
+import isEmpty from 'lodash/isEmpty'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -9,8 +11,8 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import { SETTINGS } from './data'
-import useLocalStorage from 'hooks/useLocalStorage'
 import HomeContext from 'views/HomeView/HomeContext'
+import { DEFAULT_VIDEO } from 'views/HomeView/Introduction/data'
 
 const StyledList = styled(List)`
   .MuiListItem-root {
@@ -23,13 +25,21 @@ const StyledList = styled(List)`
 `
 
 const CallToAction = ({ deleteByID }) => {
-  const { nodes, setNodes } = useContext(HomeContext)
+  const { nodes, setNodes, OnHandleSetPlayerVideo, videoPlayerState } =
+    useContext(HomeContext)
 
   const [settingsState, setSettingsState] = useState({
     loading: 'idle',
     error: false,
   })
   const isLoading = settingsState.loading === 'loading'
+
+  /** Set next video state after item is deleted */
+  const onHandleNextVideo = (nodes) => {
+    const nextVideo = head(nodes)
+    if (isEmpty(nodes)) return OnHandleSetPlayerVideo(DEFAULT_VIDEO)
+    OnHandleSetPlayerVideo(nextVideo)
+  }
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   const onDeleteLocalStorageItem = async (idToRemove) => {
@@ -41,14 +51,17 @@ const CallToAction = ({ deleteByID }) => {
     try {
       await sleep(1000)
       const newList = nodes.filter((node) => node.id !== idToRemove)
+      onHandleNextVideo(newList)
       setSettingsState((prev) => ({
         ...prev,
         loading: 'idle',
+        erro: false,
       }))
       await setNodes(newList)
     } catch (error) {
       setSettingsState((prev) => ({
         ...prev,
+        loading: 'idle',
         error: true,
       }))
     }

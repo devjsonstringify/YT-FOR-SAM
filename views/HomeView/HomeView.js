@@ -20,6 +20,7 @@ const HomeView = () => {
   const [isFormVisible, setIsFormVisible] = useToggle()
   const [isIntroduction, setIsIntroduction] = useState(true)
   const [videoPlayerState, setVideoPlayerState] = useState({
+    id: '979427ae-f5c6-483e-97ed-cc28fd99062a',
     link: '/assets/intro.mp4',
     name: '#intro',
     description:
