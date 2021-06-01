@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: `${theme.spacing(3) + 'px'} 0 0 0`,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -91,6 +91,7 @@ const Layout = ({ children }) => {
   return (
     <div className={classes.root}>
       <AppBar
+        color="inherit"
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -135,7 +136,7 @@ const Layout = ({ children }) => {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Box>{children}</Box>
+        <Box height="100%">{children}</Box>
         <Footer />
       </main>
     </div>
