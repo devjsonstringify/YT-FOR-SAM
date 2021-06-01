@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import ReactPlayer from 'react-player'
 import Box from '@material-ui/core/Box'
@@ -14,11 +14,13 @@ import Collapse from '@material-ui/core/Collapse'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import isEmpty from 'lodash/isEmpty'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import Popover from '@material-ui/core/Popover'
 import SettingsIcon from '@material-ui/icons/Settings'
 import CallToActions from './CallToAction'
+import HomeContext from 'views/HomeView/HomeContext'
 
 const StyledBox = styled(Box)`
   position: relative;
@@ -37,6 +39,7 @@ const StyledContainer = styled(Container)`
   padding: 0;
 `
 const VideoPlayer = ({ data }) => {
+  const { nodes } = useContext(HomeContext)
   const { id: videoID, avatarImage, name, subheader, link, description } = data
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -59,7 +62,7 @@ const VideoPlayer = ({ data }) => {
               avatar={<Avatar src={avatarImage} />}
               action={
                 <IconButton aria-label="settings" onClick={handleClick}>
-                  <SettingsIcon />
+                  {!isEmpty(nodes) && <SettingsIcon />}
                 </IconButton>
               }
               title={name}
