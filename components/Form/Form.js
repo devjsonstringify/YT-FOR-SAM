@@ -49,6 +49,18 @@ const FinalForm = () => {
       setPageState((prev) => ({ ...prev, error, notify: true }))
     }
   }
+
+  const { notify } = pageState
+
+  // once form is submitted, show success snackbar first then back to homepage
+  useEffect(async () => {
+    if (notify) {
+      // fake loader
+      await sleep(1000)
+      onHandleClickToggleForm()
+    }
+  }, [notify])
+
   return (
     <Grow in={isFormVisible}>
       <StyledContainer maxWidth="md">
