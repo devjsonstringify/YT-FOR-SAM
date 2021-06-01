@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useContext, useState, useEffect } from 'react'
+import getUnixTime from 'date-fns/getUnixTime'
 import { Form, Field } from 'react-final-form'
 import MuiAlert from '@material-ui/lab/Alert'
 import Box from '@material-ui/core/Box'
@@ -37,7 +38,7 @@ const FinalForm = () => {
 
   const onSubmit = async (values) => {
     try {
-      const saveNewItem = { id, ...values }
+      const saveNewItem = { id, ...values, date: getUnixTime(new Date()) }
       setPageState((prev) => ({
         ...prev,
         loading: 'loading',
