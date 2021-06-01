@@ -33,7 +33,9 @@ const StyledBox = styled(Box)`
     height: 100% !important;
   }
 `
-
+const StyledContainer = styled(Container)`
+  padding: 0;
+`
 const VideoPlayer = ({ data }) => {
   const { id: videoID, avatarImage, name, subheader, link, description } = data
   const [anchorEl, setAnchorEl] = useState(null)
@@ -50,7 +52,7 @@ const VideoPlayer = ({ data }) => {
   const id = open ? 'settings' : undefined
   return (
     <Box margin="auto">
-      <Container maxWidth="md">
+      <StyledContainer maxWidth="md">
         <Box boxShadow="0px 20px 34px 0px rgba(0,41,158,0.3)">
           <Card>
             <CardHeader
@@ -104,7 +106,7 @@ const VideoPlayer = ({ data }) => {
             </CardActions>
           </Card>
         </Box>
-      </Container>
+      </StyledContainer>
     </Box>
   )
 }

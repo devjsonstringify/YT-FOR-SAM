@@ -16,6 +16,16 @@ import VideoPlayer from 'components/VideoPlayer'
 import { DEFAULT_VIDEO } from './data'
 import PreselectedVideosList from '../PreselectedVideosList/PreselectedVideosList'
 import HomeContext from '../HomeContext'
+import { breakpoints } from 'utils/breakpoints'
+
+const StyledGridContainer = styled(Grid)`
+  .MuiGrid-item:first-child {
+    ${breakpoints('order', '', [{ 959: 1 }])}
+  }
+  .MuiGrid-item:last-child {
+    ${breakpoints('order', '', [{ 959: 0 }])}
+  }
+`
 
 const Introduction = () => {
   const { videoPlayerState, showOnlyOnceRef } = useContext(HomeContext)
@@ -28,14 +38,14 @@ const Introduction = () => {
       <Container maxWidth="lg">
         {(isWatchNowCick || showOnlyOnceRef.current) && (
           <Grow in={isWatchNowCick || showOnlyOnceRef.current}>
-            <Grid container spacing={5}>
-              <Grid item md={3}>
+            <StyledGridContainer container spacing={5}>
+              <Grid item md={3} sm={12} xs={12}>
                 <PreselectedVideosList />
               </Grid>
-              <Grid item md={9}>
+              <Grid item md={9} sm={12} xs={12}>
                 <VideoPlayer data={videoPlayerState} />
               </Grid>
-            </Grid>
+            </StyledGridContainer>
           </Grow>
         )}
 
