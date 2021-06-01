@@ -24,7 +24,7 @@ Reactjs, Nextjs, material-ui, netlify
 - [x] Delete item
 - [ ] Disable item
 - [ ] Export data 
-- [ ] Responsive
+- [x] Responsive
 
 ## How to run locally?
 First, run the development server:
