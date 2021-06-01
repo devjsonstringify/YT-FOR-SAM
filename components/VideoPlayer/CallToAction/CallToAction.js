@@ -1,4 +1,5 @@
 import { useState, Fragment, useEffect, useContext } from 'react'
+import PropTypes from 'prop-types'
 import Box from '@material-ui/core/Box'
 import Divider from '@material-ui/core/Divider'
 import head from 'lodash/head'
@@ -66,6 +67,7 @@ const CallToAction = ({ deleteByID }) => {
       }))
     }
   }
+
   return (
     <Box>
       <Typography align="center">Settings</Typography>
@@ -94,6 +96,10 @@ const CallToAction = ({ deleteByID }) => {
       </Box>
     </Box>
   )
+}
+
+CallToAction.propTypes = {
+  deleteByID: PropTypes.string.isRequired,
 }
 
 export default CallToAction

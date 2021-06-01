@@ -1,5 +1,5 @@
 export const DEFAULT_VIDEO = {
-  id: 0,
+  id: '0',
   avatarImage: '/assets/dummy.jpeg',
   title: 'juwelfahim69',
   subheader: 'Jan. 28, 2021',

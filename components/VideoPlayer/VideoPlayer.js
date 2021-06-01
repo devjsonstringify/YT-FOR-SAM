@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import ReactPlayer from 'react-player'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
@@ -106,6 +107,26 @@ const VideoPlayer = ({ data }) => {
       </Container>
     </Box>
   )
+}
+
+VideoPlayer.propTypes = {
+  data: PropTypes.shape({
+    avatarImage: '',
+    name: '',
+    subheader: '',
+    description: '',
+  }),
+}
+
+VideoPlayer.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    avatarImage: PropTypes.string,
+    name: PropTypes.string,
+    subheader: PropTypes.string,
+    link: PropTypes.string.isRequired,
+    description: PropTypes.string,
+  }),
 }
 
 export default VideoPlayer
