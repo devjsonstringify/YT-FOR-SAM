@@ -35,17 +35,10 @@ const Introduction = () => {
 
   return (
     <Box padding="2rem">
-      <Container maxWidth="lg">
+      <Box>
         {(isWatchNowCick || showOnlyOnceRef.current) && (
           <Grow in={isWatchNowCick || showOnlyOnceRef.current}>
-            <StyledGridContainer container spacing={5}>
-              <Grid item md={3} sm={12} xs={12}>
-                <PreselectedVideosList />
-              </Grid>
-              <Grid item md={9} sm={12} xs={12}>
-                <VideoPlayer data={videoPlayerState} />
-              </Grid>
-            </StyledGridContainer>
+            <PreselectedVideosList />
           </Grow>
         )}
 
@@ -81,7 +74,7 @@ const Introduction = () => {
             </Box>
           </Paper>
         )}
-      </Container>
+      </Box>
     </Box>
   )
 }

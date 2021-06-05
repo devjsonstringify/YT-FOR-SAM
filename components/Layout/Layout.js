@@ -137,7 +137,7 @@ const Layout = ({ children }) => {
       >
         <div className={classes.drawerHeader} />
         <Box height="100%">{children}</Box>
-        <Footer />
+        {/* <Footer /> */}
       </main>
     </div>
   )
