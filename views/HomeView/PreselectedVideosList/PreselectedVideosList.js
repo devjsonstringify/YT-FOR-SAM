@@ -12,11 +12,6 @@ const PreselectedVideosList = () => {
 
   return (
     <Box padding="1rem" overflow="auto">
-      <Box margin="1rem auto">
-        <Typography variant="h4">
-          {isEmpty(nodes) ? 'Empty list' : 'Recently added'}
-        </Typography>
-      </Box>
       <Cards data={nodes} />
     </Box>
   )

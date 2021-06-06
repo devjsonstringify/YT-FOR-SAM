@@ -2,6 +2,8 @@ import { useMemo, useCallback, useState } from 'react'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import Card from 'components/Card'
+import Typography from '@material-ui/core/Typography'
+import isEmpty from 'lodash/isEmpty'
 import styled from 'styled-components'
 import { breakpoints } from 'utils/breakpoints'
 import CardsContext from './CardsContext'
@@ -43,6 +45,11 @@ const Cards = ({ data }) => {
   return (
     <CardsContext.Provider value={CardsAPI}>
       <Container maxWidth="lg">
+        <Box margin="1rem auto">
+          <Typography variant="h4">
+            {isEmpty(data) ? 'Empty list' : 'Recently added'}
+          </Typography>
+        </Box>
         <StyledRootCards>
           {data.map((item) => (
             <Card {...item} key={item.id} />
