@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import Box from '@material-ui/core/Box'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -9,16 +9,15 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Collapse from '@material-ui/core/Collapse'
 import PlayCircleFilledOutlinedIcon from '@material-ui/icons/PlayCircleFilledOutlined'
-import ReactPlayer from 'react-player'
 import styled from 'styled-components'
+import CardsContext from 'components/Cards/CardsContext'
 
 const StyledCard = styled(Card)`
+  cursor: pointer;
   background-color: #002547;
   border-radius: 8px;
-  /* box-shadow: 0px 5px 5px 0px rgba(0, 41, 158, 0.3); */
   transition: background-color 0.3s linear;
   position: relative;
-  /* min-width: 18.75rem; */
   min-height: 12.5rem;
 
   .MuiCardActionArea-root {
@@ -38,7 +37,7 @@ const StyledCard = styled(Card)`
     word-break: break-all;
   }
 `
-const StyledBoxPlayBtn = styled(Box)`
+const StyledBoxPlay = styled(Box)`
   align-items: flex-end;
   display: flex;
   justify-content: flex-end;
@@ -48,7 +47,6 @@ const StyledBoxPlayBtn = styled(Box)`
   z-index: 1;
 
   .MuiSvgIcon-root {
-    cursor: pointer;
     fill: #ffc300;
     height: 2em;
     width: 2em;
@@ -57,18 +55,41 @@ const StyledBoxPlayBtn = styled(Box)`
   }
 `
 
-const VideoCard = ({ id, avatarImage, name, subheader, link, description }) => {
+const VideoCard = ({
+  id,
+  avatarImage,
+  name,
+  subheader,
+  link,
+  description,
+  date,
+}) => {
   const [isHovered, setIsHovered] = useState()
+  const { showItemDetails, setShowItemDetails, toggleDrawer, setVideoDetails } =
+    useContext(CardsContext)
 
   return (
     <StyledCard
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => {
+        setVideoDetails((prev) => ({
+          ...prev,
+          id,
+          avatarImage,
+          name,
+          subheader,
+          link,
+          description,
+          date,
+        }))
+        toggleDrawer()
+      }}
     >
       <Collapse in={isHovered} timeout={1}>
-        <StyledBoxPlayBtn>
+        <StyledBoxPlay>
           {isHovered && <PlayCircleFilledOutlinedIcon />}
-        </StyledBoxPlayBtn>
+        </StyledBoxPlay>
       </Collapse>
       <CardActionArea>
         {/* <CardMedia image="/assets/playing.jpg" title={name} /> */}
