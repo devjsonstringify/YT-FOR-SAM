@@ -36,25 +36,11 @@ const StyledCard = styled(Card)`
     font-weight: 500;
     word-break: break-all;
   }
-`
-const StyledBoxPlay = styled(Box)`
-  align-items: flex-end;
-  display: flex;
-  justify-content: flex-end;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
 
-  .MuiSvgIcon-root {
-    fill: #ffc300;
-    height: 2em;
-    width: 2em;
-    transition: all 0.3s ease;
-    margin: 1rem;
+  &:hover {
+    background-color: #000a14;
   }
 `
-
 const VideoCard = ({
   id,
   avatarImage,
@@ -86,11 +72,7 @@ const VideoCard = ({
         toggleDrawer()
       }}
     >
-      <Collapse in={isHovered} timeout={1}>
-        <StyledBoxPlay>
-          {isHovered && <PlayCircleFilledOutlinedIcon />}
-        </StyledBoxPlay>
-      </Collapse>
+      <Collapse in={isHovered} timeout={1}></Collapse>
       <CardActionArea>
         {/* <CardMedia image="/assets/playing.jpg" title={name} /> */}
         <CardContent>
