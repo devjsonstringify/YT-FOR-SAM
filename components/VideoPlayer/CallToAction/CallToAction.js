@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import { SETTINGS } from './data'
 import HomeContext from 'views/HomeView/HomeContext'
+import CardsContext from 'components/Cards/CardsContext'
 import { DEFAULT_VIDEO } from 'views/HomeView/Introduction/data'
 
 const StyledList = styled(List)`
@@ -28,6 +29,7 @@ const StyledList = styled(List)`
 const CallToAction = ({ deleteByID }) => {
   const { nodes, setNodes, OnHandleSetPlayerVideo, videoPlayerState } =
     useContext(HomeContext)
+  const { setIsPlayVideo } = useContext(CardsContext)
 
   const [settingsState, setSettingsState] = useState({
     loading: 'idle',
@@ -59,6 +61,7 @@ const CallToAction = ({ deleteByID }) => {
         erro: false,
       }))
       await setNodes(newList)
+      setIsPlayVideo(false)
     } catch (error) {
       setSettingsState((prev) => ({
         ...prev,

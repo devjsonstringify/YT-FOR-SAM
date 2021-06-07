@@ -42,6 +42,7 @@ const ContentDrawer = () => {
     toggleDrawer,
     setVideoDetails,
     videoDetails,
+    setIsPlayVideo,
   } = useContext(CardsContext)
 
   const { id, description, name, date } = videoDetails
@@ -91,7 +92,10 @@ const ContentDrawer = () => {
                 size="medium"
                 variant="contained"
                 color="secondary"
-                onClick={toggleDrawer}
+                onClick={() => {
+                  setIsPlayVideo(true)
+                  setShowItemDetails(true)
+                }}
               >
                 <PlayArrowIcon />
                 Watch

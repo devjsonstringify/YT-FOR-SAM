@@ -55,7 +55,7 @@ const VideoPlayer = ({ data }) => {
   const id = open ? 'settings' : undefined
   return (
     <Box margin="auto">
-      <StyledContainer maxWidth="md">
+      <StyledContainer maxWidth="sm">
         <Box boxShadow="0px 20px 34px 0px rgba(0,41,158,0.3)">
           <Card>
             <CardHeader
