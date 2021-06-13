@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react'
+import { useState, useContext, useRef, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
@@ -28,14 +28,15 @@ const StyledGridContainer = styled(Grid)`
 `
 
 const Introduction = () => {
-  const { videoPlayerState, showOnlyOnceRef } = useContext(HomeContext)
+  const { videoPlayerState, showOnlyOnceRef, setIsHomeView } =
+    useContext(HomeContext)
   const [isWatchNowCick, setIsWatchNowCick] = useToggle(false)
   const [isFormVisible, setIsFormVisible] = useToggle(false)
   const reference = useRef(false)
 
   return (
-    <Box padding="2rem">
-      <Box>
+    <Box padding={reference ? '0' : '2rem'} height="100%">
+      <Box height="100%">
         {(isWatchNowCick || showOnlyOnceRef.current) && (
           <Grow in={isWatchNowCick || showOnlyOnceRef.current}>
             <PreselectedVideosList />
@@ -43,16 +44,18 @@ const Introduction = () => {
         )}
 
         {showOnlyOnceRef.current ? null : (
-          <Paper ref={reference}>
-            <Box
-              padding="5rem"
-              boxShadow="-10px 17px 0px 0px rgba(0,41,158,0.3)"
-            >
+          <Box
+            ref={reference}
+            height="100%"
+            marginTop="calc(100vh / 4)"
+            padding="0 2rem"
+          >
+            <Box height="100%">
               <Box position="abosolute" width="100%">
-                <Typography variant="h2" color="secondary" align="center">
+                <Typography variant="h3" color="secondary" align="center">
                   "Lets build the future together with kids."
                 </Typography>
-                <Typography paragraph align="center">
+                <Typography variant="h6" align="center">
                   Watch video of choice, play it here.
                 </Typography>
                 <Box display="flex">
@@ -64,6 +67,7 @@ const Introduction = () => {
                       onClick={() => {
                         showOnlyOnceRef.current = true
                         setIsWatchNowCick()
+                        setIsHomeView(false)
                       }}
                     >
                       Watch now
@@ -72,7 +76,7 @@ const Introduction = () => {
                 </Box>
               </Box>
             </Box>
-          </Paper>
+          </Box>
         )}
       </Box>
     </Box>

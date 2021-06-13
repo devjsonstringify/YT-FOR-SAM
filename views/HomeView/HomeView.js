@@ -8,6 +8,7 @@ import {
 } from 'react'
 import Layout from 'components/Layout'
 import VideoPlayer from 'components/VideoPlayer'
+import Box from '@material-ui/core/Box'
 import Form from 'components/Form'
 import HomeContext from './HomeContext'
 import useToggle from 'hooks/useToggle'
@@ -15,6 +16,7 @@ import useLocalStorage from 'hooks/useLocalStorage'
 import Introduction from './Introduction/Introduction'
 
 const HomeView = () => {
+  const [isHomeView, setIsHomeView] = useState(true)
   const [nodes, setNodes] = useLocalStorage('nodes', [])
   const showOnlyOnceRef = useRef(false)
   const [isFormVisible, setIsFormVisible] = useToggle()
@@ -55,6 +57,7 @@ const HomeView = () => {
       showOnlyOnceRef,
       nodes,
       setNodes,
+      setIsHomeView,
     }),
     [isFormVisible, videoPlayerState, nodes],
   )

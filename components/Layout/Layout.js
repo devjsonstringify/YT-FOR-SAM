@@ -11,9 +11,12 @@ import Typography from '@material-ui/core/Typography'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import styled from 'styled-components'
+import ReactPlayer from 'react-player'
 import Header from 'components/Layout/Header'
 import Sidebar from 'components/Layout/Sidebar'
 import Footer from 'components/Layout/Footer'
+import useWindowSize from 'hooks/useWindowSize'
 
 const drawerWidth = 240
 
@@ -75,6 +78,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+const FullWidthBackground = styled.main`
+  /* background: #ffffff url('/assets/watching.jpg') no-repeat center center;
+  background-size: contain; */
+  background-color: #ffffff;
+  opacity: 1;
+  background: radial-gradient(
+      circle,
+      transparent 20%,
+      #ffffff 20%,
+      #ffffff 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        #ffffff 20%,
+        #ffffff 80%,
+        transparent 80%,
+        transparent
+      )
+      20px 20px,
+    linear-gradient(#ffc300 1.6px, transparent 1.6px) 0 -0.8px,
+    linear-gradient(90deg, #ffc300 1.6px, #ffffff 1.6px) -0.8px 0;
+  background-size: 40px 40px, 40px 40px, 20px 20px, 20px 20px;
+`
 const Layout = ({ children }) => {
   const classes = useStyles()
   const theme = useTheme()
@@ -87,28 +116,32 @@ const Layout = ({ children }) => {
   const handleDrawerClose = () => {
     setOpen(false)
   }
+  const size = useWindowSize()
 
   return (
     <div className={classes.root}>
       <AppBar
-        color="default"
+        color="transparent"
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+        elevation={0}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Header />
-        </Toolbar>
+        <Box marginTop="1rem">
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Header />
+          </Toolbar>
+        </Box>
       </AppBar>
       <Drawer
         className={classes.drawer}
@@ -130,15 +163,15 @@ const Layout = ({ children }) => {
         </div>
         <Sidebar />
       </Drawer>
-      <main
+      <FullWidthBackground
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
         <div className={classes.drawerHeader} />
-        <Box height="100%">{children}</Box>
+        <Box height={`calc(100% - ${size.height}px)`}>{children}</Box>
         {/* <Footer /> */}
-      </main>
+      </FullWidthBackground>
     </div>
   )
 }

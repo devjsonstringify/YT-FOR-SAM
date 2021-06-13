@@ -12,6 +12,7 @@ import HomeContext from 'views/HomeView/HomeContext'
 import { breakpoints } from 'utils/breakpoints'
 
 const StyledBox = styled(Box)`
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: space-between;
   width: 100%;
